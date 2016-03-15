@@ -18,6 +18,7 @@ public class Inviter {
     private Repository<Invite> inviteRepository;
     private Finder<Invite, Long> inviteFinder;
     private Listener createListener = LogErrorListener.get();
+    private Listener updateListener = LogErrorListener.get();
 
     public Inviter(Repository<Invite> inviteRepository, Finder inviteFinder) {
         this.inviteRepository = inviteRepository;
@@ -34,5 +35,12 @@ public class Inviter {
 
     public List<Invite> listInvitesTo(User user, int size){
         return inviteFinder.findBy("user", user).list(size);
+    }
+
+
+    public boolean accept(Invite invite) {
+        invite.setAccepted(true);
+        inviteRepository.update(invite, updateListener);
+        return true;
     }
 }

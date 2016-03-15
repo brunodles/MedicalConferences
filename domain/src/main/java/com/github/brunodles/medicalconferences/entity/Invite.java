@@ -7,6 +7,7 @@ public class Invite {
 
     private final User user;
     private final Conference conference;
+    private boolean accepted;
 
     public Invite(User user, Conference conference) {
         this.user = user;
@@ -19,5 +20,13 @@ public class Invite {
 
     public Conference getConference() {
         return conference;
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.accepted = accepted;
+    }
+
+    public boolean isAccepted() {
+        return accepted;
     }
 }

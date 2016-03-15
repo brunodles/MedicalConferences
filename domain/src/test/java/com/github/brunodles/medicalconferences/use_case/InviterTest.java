@@ -24,6 +24,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.atMost;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.only;
@@ -43,6 +44,8 @@ public class InviterTest {
     private boolean result;
 
     private List<Invite> inviteList;
+
+    private Invite invite;
 
     {
         describe("Given a Inviter", () -> {
@@ -108,10 +111,10 @@ public class InviterTest {
                         expect(inviteList.size()).toEqual(0);
                     });
 
-//                    it("should call finder 2 times", () -> {
-//                        verify(finder, only()).findBy(eq("user"), any(User.class));
-//                        verify(finder, only()).list(eq(10));
-//                    });
+                    it("should call finder 2 times", () -> {
+                        verify(finder, atMost(2)).findBy(eq("user"), any(User.class));
+                        verify(finder, atMost(2)).list(eq(10));
+                    });
                 });
 
                 describe("When a invite was added before", () -> {
@@ -128,10 +131,30 @@ public class InviterTest {
                         expect(inviteList.isEmpty()).toBeFalse();
                     });
 
-//                    it("should call finder", () -> {
-//                        verify(finder, only()).findBy(anyString(), any(User.class));
-//                        verify(finder, only()).list((10));
-//                    });
+                    it("should call finder", () -> {
+                        verify(finder, atMost(2)).findBy(anyString(), any(User.class));
+                        verify(finder, atMost(2)).list((10));
+                    });
+
+
+                    describe("When the user accept", () -> {
+                        before(() -> {
+                            invite = inviteList.get(0);
+                            result = inviter.accept(invite);
+                        });
+
+                        it("should return true", () -> {
+                            expect(result).toBeTrue();
+                        });
+
+                        it("should update the invite.accepted to true", () -> {
+                            expect(invite.isAccepted()).toBeTrue();
+                        });
+
+                        it("should update the repository with invite changes", () -> {
+                            verify(repo, only()).update(eq(invite), any(Listener.class));
+                        });
+                    });
 
                 });
             });
