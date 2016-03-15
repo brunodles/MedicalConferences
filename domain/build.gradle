@@ -1,0 +1,16 @@
+apply plugin: 'java'
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Tests
+    testCompile 'junit:junit:4.12'
+    testCompile "org.mockito:mockito-core:1.10.19"
+    testCompile 'com.mscharhag.oleaster:oleaster-matcher:0.1.2'
+    testCompile 'com.mscharhag.oleaster:oleaster-runner:0.1.2'
+    testCompile 'com.github.brunodles:OleasterSuiteRunner:0.1'
+    testCompile 'com.thedeanda:lorem:2.0'
+
+    // time
+    compile 'joda-time:joda-time:2.3'
+}
