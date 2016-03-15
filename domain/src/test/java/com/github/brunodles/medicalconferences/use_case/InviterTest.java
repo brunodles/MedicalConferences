@@ -136,7 +136,6 @@ public class InviterTest {
                         verify(finder, atMost(2)).list((10));
                     });
 
-
                     describe("When the user accept", () -> {
                         before(() -> {
                             invite = inviteList.get(0);
@@ -147,8 +146,35 @@ public class InviterTest {
                             expect(result).toBeTrue();
                         });
 
-                        it("should update the invite.accepted to true", () -> {
+                        it("should return true to isAccepted", () -> {
                             expect(invite.isAccepted()).toBeTrue();
+                        });
+
+                        it("should return false for isRejected", () -> {
+                            expect(invite.isRejected()).toBeFalse();
+                        });
+
+                        it("should update the repository with invite changes", () -> {
+                            verify(repo, only()).update(eq(invite), any(Listener.class));
+                        });
+                    });
+
+                    describe("When the user reject", () -> {
+                        before(() -> {
+                            invite = inviteList.get(0);
+                            result = inviter.reject(invite);
+                        });
+
+                        it("should return true", () -> {
+                            expect(result).toBeTrue();
+                        });
+
+                        it("should return false for isAccepted", () -> {
+                            expect(invite.isAccepted()).toBeFalse();
+                        });
+
+                        it("should return true for isRejected", () -> {
+                            expect(invite.isRejected()).toBeTrue();
                         });
 
                         it("should update the repository with invite changes", () -> {

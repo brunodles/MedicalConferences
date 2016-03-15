@@ -39,7 +39,13 @@ public class Inviter {
 
 
     public boolean accept(Invite invite) {
-        invite.setAccepted(true);
+        invite.setAccepted();
+        inviteRepository.update(invite, updateListener);
+        return true;
+    }
+
+    public boolean reject(Invite invite) {
+        invite.setRejected();
         inviteRepository.update(invite, updateListener);
         return true;
     }

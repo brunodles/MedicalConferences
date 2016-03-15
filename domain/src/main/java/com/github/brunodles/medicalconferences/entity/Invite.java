@@ -7,11 +7,12 @@ public class Invite {
 
     private final User user;
     private final Conference conference;
-    private boolean accepted;
+    private State state;
 
     public Invite(User user, Conference conference) {
         this.user = user;
         this.conference = conference;
+        state = State.NONE;
     }
 
     public User getUser() {
@@ -22,11 +23,23 @@ public class Invite {
         return conference;
     }
 
-    public void setAccepted(boolean accepted) {
-        this.accepted = accepted;
+    public void setAccepted() {
+        state = State.ACCEPTED;
+    }
+
+    public void setRejected(){
+        state = State.REJECTED;
     }
 
     public boolean isAccepted() {
-        return accepted;
+        return state == State.ACCEPTED;
+    }
+
+    public boolean isRejected() {
+        return state == State.REJECTED;
+    }
+
+    private static enum State{
+        NONE, ACCEPTED, REJECTED;
     }
 }
