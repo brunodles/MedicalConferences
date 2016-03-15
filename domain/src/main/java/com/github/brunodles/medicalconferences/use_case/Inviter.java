@@ -8,7 +8,6 @@ import com.github.brunodles.medicalconferences.reposytory.Listener;
 import com.github.brunodles.medicalconferences.reposytory.LogErrorListener;
 import com.github.brunodles.medicalconferences.reposytory.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
