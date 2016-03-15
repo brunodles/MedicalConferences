@@ -43,25 +43,25 @@ public class Factory {
 
     public static Contact contact() {
         Contact contact = new Contact();
-        contact.setName("Kate Potter");
-        contact.setEmail("kate.potter@email.com");
+        contact.setName("Leonard McCoy");
+        contact.setEmail("mccoy@enterprise.com");
         contact.setPhone("99999-8888");
         return contact;
     }
 
     public static User user() {
-        User u = new User();
-        u.setName("Doctor Spock");
-        u.setLogin("spock");
-        u.setPassword("vulcano");
-        return u;
+        User user = new User();
+        user.setName("Doctor Spock");
+        user.setLogin("spock");
+        user.setPassword("vulcan");
+        return user;
     }
 
     public static User admin() {
         User user = new User();
-        user.setName("Organizer");
-        user.setLogin("admin");
-        user.setPassword("1234");
+        user.setName("James Tiberius Kirk");
+        user.setLogin("kirk");
+        user.setPassword("enterprise");
         user.setAdmin(true);
         return user;
     }
