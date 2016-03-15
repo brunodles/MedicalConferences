@@ -12,4 +12,6 @@ public interface Finder<T, ID> {
     Finder<T, ID> findBy(String key, Object object);
 
     List<T> list(int size);
+
+    List<T> list();
 }

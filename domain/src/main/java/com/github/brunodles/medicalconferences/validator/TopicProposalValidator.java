@@ -13,6 +13,7 @@ public class TopicProposalValidator implements Validator<TopicProposal> {
     @Override
     public boolean isValid(TopicProposal topicProposal) {
         if (topicProposal.getConference() == null) return false;
+        if (topicProposal.getSpeaker() == null) return false;
         if (isNullOrEmpty(topicProposal.getTopic())) return false;
         return true;
     }

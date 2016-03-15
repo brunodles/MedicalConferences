@@ -3,6 +3,7 @@ package com.github.brunodles.medicalconferences;
 import com.github.brunodles.medicalconferences.entity.Conference;
 import com.github.brunodles.medicalconferences.entity.Contact;
 import com.github.brunodles.medicalconferences.entity.Invite;
+import com.github.brunodles.medicalconferences.entity.TopicProposal;
 import com.github.brunodles.medicalconferences.entity.User;
 
 import java.text.ParseException;
@@ -80,5 +81,13 @@ public class Factory {
 
     public static Invite invite2() {
         return new Invite(user(), conference2());
+    }
+
+    public static TopicProposal topicProposal() {
+        return new TopicProposal(conference(), "Main Topic", admin());
+    }
+
+    public static TopicProposal topicProposal2() {
+        return new TopicProposal(conference(), "Second topic", user());
     }
 }

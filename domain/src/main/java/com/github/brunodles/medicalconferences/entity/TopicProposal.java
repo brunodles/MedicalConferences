@@ -6,10 +6,12 @@ package com.github.brunodles.medicalconferences.entity;
 public class TopicProposal {
     private final Conference conference;
     private final String topic;
+    private final User speaker;
 
-    public TopicProposal(Conference conference, String topic) {
+    public TopicProposal(Conference conference, String topic, User speaker) {
         this.conference = conference;
         this.topic = topic;
+        this.speaker = speaker;
     }
 
     public Conference getConference() {
@@ -18,5 +20,9 @@ public class TopicProposal {
 
     public String getTopic() {
         return topic;
+    }
+
+    public User getSpeaker() {
+        return speaker;
     }
 }
