@@ -37,4 +37,8 @@ public class TopicProposer {
     public List<TopicProposal> topicsFor(Conference conference) {
         return topicFinder.findBy("conference", conference).list();
     }
+
+    public void setCreateListener(Listener createListener) {
+        this.createListener = createListener;
+    }
 }

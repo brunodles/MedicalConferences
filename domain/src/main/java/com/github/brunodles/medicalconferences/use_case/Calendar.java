@@ -3,7 +3,6 @@ package com.github.brunodles.medicalconferences.use_case;
 import com.github.brunodles.medicalconferences.entity.Conference;
 import com.github.brunodles.medicalconferences.reposytory.Finder;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

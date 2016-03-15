@@ -48,4 +48,12 @@ public class Scheduler {
         repository.update(conference, updateListener);
         return true;
     }
+
+    public void setCreateListener(Listener createListener) {
+        this.createListener = createListener;
+    }
+
+    public void setUpdateListener(Listener updateListener) {
+        this.updateListener = updateListener;
+    }
 }

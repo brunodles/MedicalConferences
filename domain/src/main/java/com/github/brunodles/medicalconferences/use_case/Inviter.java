@@ -20,20 +20,20 @@ public class Inviter {
     private Listener createListener = LogErrorListener.get();
     private Listener updateListener = LogErrorListener.get();
 
-    public Inviter(Repository<Invite> inviteRepository, Finder inviteFinder) {
+    public Inviter(Repository<Invite> inviteRepository, Finder<Invite, Long> inviteFinder) {
         this.inviteRepository = inviteRepository;
         this.inviteFinder = inviteFinder;
     }
 
     public boolean invite(User user, Conference conference) {
-        if (user==null) return false;
-        if (conference==null) return false;
+        if (user == null) return false;
+        if (conference == null) return false;
         Invite invite = new Invite(user, conference);
         inviteRepository.create(invite, createListener);
         return true;
     }
 
-    public List<Invite> listInvitesTo(User user, int size){
+    public List<Invite> listInvitesTo(User user, int size) {
         return inviteFinder.findBy("user", user).list(size);
     }
 
@@ -48,5 +48,13 @@ public class Inviter {
         invite.setRejected();
         inviteRepository.update(invite, updateListener);
         return true;
+    }
+
+    public void setCreateListener(Listener createListener) {
+        this.createListener = createListener;
+    }
+
+    public void setUpdateListener(Listener updateListener) {
+        this.updateListener = updateListener;
     }
 }
