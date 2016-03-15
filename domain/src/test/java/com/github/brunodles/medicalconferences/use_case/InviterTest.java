@@ -44,20 +44,6 @@ public class InviterTest {
 
     private List<Invite> inviteList;
 
-    private void itShouldNotCallRepository() {
-        it("should not call the repository", () -> {
-            verify(repo, never()).create(anyObject(), any(Listener.class));
-            verify(repo, never()).update(anyObject(), any(Listener.class));
-            verify(repo, never()).delete(anyObject(), any(Listener.class));
-        });
-    }
-
-    private void itShouldReturnFalse() {
-        it("should return false", () -> {
-            expect(result).toBeFalse();
-        });
-    }
-
     {
         describe("Given a Inviter", () -> {
             before(() -> {
@@ -150,6 +136,20 @@ public class InviterTest {
                 });
             });
 
+        });
+    }
+
+    private void itShouldNotCallRepository() {
+        it("should not call the repository", () -> {
+            verify(repo, never()).create(anyObject(), any(Listener.class));
+            verify(repo, never()).update(anyObject(), any(Listener.class));
+            verify(repo, never()).delete(anyObject(), any(Listener.class));
+        });
+    }
+
+    private void itShouldReturnFalse() {
+        it("should return false", () -> {
+            expect(result).toBeFalse();
         });
     }
 }
