@@ -1,4 +1,9 @@
 apply plugin: 'java'
+apply plugin: 'me.tatarka.retrolambda'
+
+retrolambda {
+    javaVersion JavaVersion.VERSION_1_6
+}
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -14,3 +19,5 @@ dependencies {
     // time
     compile 'joda-time:joda-time:2.3'
 }
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
