@@ -24,11 +24,6 @@ import static org.junit.Assert.*;
         constants = BuildConfig.class)
 public class ContactTest {
 
-    @Before
-    public void before(){
-        ActiveAndroid.initialize(RuntimeEnvironment.application);
-    }
-
     @Test
     public void shouldBeAbleToCallContactSave(){
         Contact contact = new Contact();

@@ -18,25 +18,25 @@ abstract class BaseRepository<Entity, DTO extends Model> implements Repository<E
 
     @Override
     public void create(Entity object, Listener listener) {
-        tryWithConference(object, Model::save, listener);
+        tryWithObject(object, Model::save, listener);
     }
 
     @Override
     public void update(Entity object, Listener listener) {
-        tryWithConference(object, Model::save, listener);
+        tryWithObject(object, Model::save, listener);
     }
 
     @Override
     public void delete(Entity object, Listener listener) {
-        tryWithConference(object, Model::delete, listener);
+        tryWithObject(object, Model::delete, listener);
 
     }
 
-    private void tryWithConference(Entity obj, Callable<DTO> block, Listener listener) {
+    private void tryWithObject(Entity obj, Callable<DTO> block, Listener listener) {
         ActiveAndroid.beginTransaction();
-        DTO conference = parse(obj);
+        DTO object = parse(obj);
         try {
-            block.run(conference);
+            block.run(object);
             ActiveAndroid.setTransactionSuccessful();
             listener.onFinish(null);
         } catch (Exception e) {

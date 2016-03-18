@@ -25,9 +25,11 @@ public class Contact extends Model {
     public String phone;
 
     public Contact() {
+        super();
     }
 
     public Contact(com.github.brunodles.medicalconferences.entity.Contact contact) {
+        super();
         this.id = contact.getId();
         this.name = contact.getName();
         this.email = contact.getEmail();

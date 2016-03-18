@@ -88,4 +88,8 @@ public class Conference {
     public void setCanceled(boolean canceled) {
         this.canceled = canceled;
     }
+
+    public boolean isCanceled() {
+        return canceled;
+    }
 }
