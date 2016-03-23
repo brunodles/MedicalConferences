@@ -2,21 +2,21 @@ package com.github.brunodles.medicalconferences.use_case;
 
 import com.github.brunodles.medicalconferences.entity.Conference;
 import com.github.brunodles.medicalconferences.entity_impl.ConferenceImpl;
-import com.github.brunodles.medicalconferences.reposytory.Finder;
+import com.github.brunodles.medicalconferences.reposytory.ConferenceFinder;
+import com.github.brunodles.medicalconferences.reposytory.ConferenceRepository;
 import com.github.brunodles.medicalconferences.reposytory.Listener;
 import com.github.brunodles.medicalconferences.reposytory.LogErrorListener;
-import com.github.brunodles.medicalconferences.reposytory.Repository;
 import com.github.brunodles.medicalconferences.validator.ConferenceValidator;
 
 public class Scheduler {
 
     private final ConferenceValidator conferenceValidator;
-    private Repository<Conference> repository;
-    private Finder<Conference, Long> finder;
+    private ConferenceRepository repository;
+    private ConferenceFinder finder;
     private Listener createListener = LogErrorListener.get();
     private Listener updateListener = LogErrorListener.get();
 
-    public Scheduler(Repository<Conference> repository, Finder<Conference, Long> finder) {
+    public Scheduler(ConferenceRepository repository, ConferenceFinder finder) {
         this.repository = repository;
         this.finder = finder;
         conferenceValidator = new ConferenceValidator();

@@ -4,10 +4,10 @@ import com.github.brunodles.medicalconferences.entity.Conference;
 import com.github.brunodles.medicalconferences.entity.Invite;
 import com.github.brunodles.medicalconferences.entity.User;
 import com.github.brunodles.medicalconferences.entity_impl.InviteImpl;
-import com.github.brunodles.medicalconferences.reposytory.Finder;
+import com.github.brunodles.medicalconferences.reposytory.InviteFinder;
+import com.github.brunodles.medicalconferences.reposytory.InviteRepository;
 import com.github.brunodles.medicalconferences.reposytory.Listener;
 import com.github.brunodles.medicalconferences.reposytory.LogErrorListener;
-import com.github.brunodles.medicalconferences.reposytory.Repository;
 
 import java.util.List;
 
@@ -16,12 +16,12 @@ import java.util.List;
  */
 public class Inviter {
 
-    private Repository<Invite> inviteRepository;
-    private Finder<Invite, Long> inviteFinder;
+    private InviteRepository inviteRepository;
+    private InviteFinder inviteFinder;
     private Listener createListener = LogErrorListener.get();
     private Listener updateListener = LogErrorListener.get();
 
-    public Inviter(Repository<Invite> inviteRepository, Finder<Invite, Long> inviteFinder) {
+    public Inviter(InviteRepository inviteRepository, InviteFinder inviteFinder) {
         this.inviteRepository = inviteRepository;
         this.inviteFinder = inviteFinder;
     }

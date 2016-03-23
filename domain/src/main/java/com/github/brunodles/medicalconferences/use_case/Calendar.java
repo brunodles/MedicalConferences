@@ -1,7 +1,7 @@
 package com.github.brunodles.medicalconferences.use_case;
 
 import com.github.brunodles.medicalconferences.entity.Conference;
-import com.github.brunodles.medicalconferences.reposytory.Finder;
+import com.github.brunodles.medicalconferences.reposytory.ConferenceFinder;
 
 import java.util.Date;
 import java.util.List;
@@ -11,9 +11,9 @@ import java.util.List;
  */
 public class Calendar {
 
-    Finder<Conference, Long> conferenceFinder;
+    ConferenceFinder conferenceFinder;
 
-    public Calendar(Finder<Conference, Long> conferenceFinder) {
+    public Calendar(ConferenceFinder conferenceFinder) {
         this.conferenceFinder = conferenceFinder;
     }
 
