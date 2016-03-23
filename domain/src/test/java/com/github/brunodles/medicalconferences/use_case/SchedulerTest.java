@@ -2,6 +2,7 @@ package com.github.brunodles.medicalconferences.use_case;
 
 import com.github.brunodles.medicalconferences.Factory;
 import com.github.brunodles.medicalconferences.entity.Conference;
+import com.github.brunodles.medicalconferences.entity_impl.ConferenceImpl;
 import com.github.brunodles.medicalconferences.reposytory.Finder;
 import com.github.brunodles.medicalconferences.reposytory.Listener;
 import com.github.brunodles.medicalconferences.reposytory.Repository;
@@ -67,7 +68,7 @@ public class SchedulerTest {
                 describe("When the conference is invalid", () -> {
 
                     beforeEach(() -> {
-                        conference = new Conference();
+                        conference = new ConferenceImpl();
                         result = scheduler.add(conference);
                     });
 
@@ -85,22 +86,19 @@ public class SchedulerTest {
             describe("When edit a conference", () -> {
 
                 beforeEach(() -> {
-                    Conference c = conference();
-                    c.setId(1L);
-                    when(finder.get(1L)).thenReturn(c);
+                    conference = scheduler.get(1L);
+                    ConferenceImpl c = new ConferenceImpl(conference());
+                    c.setName("New Name");
+                    conference = c;
+                    result = scheduler.edit(c);
                 });
 
-                describe("When get it from scheduler list", () -> {
-                    beforeEach(() -> {
-                        conference = scheduler.get(1L);
-                        conference.setName("New name");
-                        scheduler.edit(conference);
-                    });
+                it("should return true", () -> {
+                    expect(result).toBeTrue();
+                });
 
-                    it("should return call repository.update", () -> {
-                        verify(repo, only()).update(eq(conference), any(Listener.class));
-                    });
-
+                it("should call repository.update", () -> {
+                    verify(repo, only()).update(eq(conference), any(Listener.class));
                 });
             });
 
@@ -110,49 +108,11 @@ public class SchedulerTest {
 
                     beforeEach(() -> {
                         conference = conference();
-                        conference.setId(1L);
-                        result = scheduler.cancel(conference);
+                        conference = scheduler.cancel(conference);
                     });
 
-                    it("should return true", () -> {
-                        expect(result).toBeTrue();
-                    });
-
-                });
-
-                describe("When using a valid conference id", () -> {
-                    beforeEach(() -> {
-                        conference = conference();
-                        when(finder.get(1L)).thenReturn(conference);
-                        result = scheduler.cancel(1L);
-                    });
-
-                    it("should return a true", () -> {
-                        expect(result).toBeTrue();
-                    });
-
-                    it("should use finder to get the object", () -> {
-                        verify(finder, only()).get(1L);
-                    });
-
-                    it("should update the conference on repository", () -> {
-                        verify(repo, only()).update(eq(conference), any(Listener.class));
-                    });
-
-                });
-
-                describe("When using a invalid conference id", () -> {
-                    beforeEach(() -> {
-                        when(finder.get(1L)).thenReturn(null);
-                        result = scheduler.cancel(1);
-                    });
-
-                    it("should return false", () -> {
-                        expect(result).toBeFalse();
-                    });
-
-                    it("should not update the conference on repository", () -> {
-                        verify(repo, never()).update(any(Conference.class), any(Listener.class));
+                    it("should return true when call isCanceled", () -> {
+                        expect(conference.isCanceled()).toBeTrue();
                     });
 
                 });

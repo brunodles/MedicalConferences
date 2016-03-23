@@ -3,16 +3,17 @@ package com.github.brunodles.medicalconferences.repositories;
 import android.support.annotation.NonNull;
 
 import com.github.brunodles.medicalconferences.entity.Contact;
+import com.github.brunodles.medicalconferences.repositories.dtos.ContactRecord;
 
 /**
  * Created by bruno on 15/03/16.
  */
 public class ContactRepository extends BaseRepository<
-        Contact, com.github.brunodles.medicalconferences.repositories.dtos.Contact> {
+        Contact, ContactRecord> {
 
     @NonNull
     @Override
-    com.github.brunodles.medicalconferences.repositories.dtos.Contact parse(Contact obj) {
-        return new com.github.brunodles.medicalconferences.repositories.dtos.Contact(obj);
+    ContactRecord parse(Contact obj) {
+        return new ContactRecord(obj);
     }
 }

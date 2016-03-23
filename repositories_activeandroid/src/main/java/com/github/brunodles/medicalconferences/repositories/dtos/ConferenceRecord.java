@@ -3,6 +3,8 @@ package com.github.brunodles.medicalconferences.repositories.dtos;
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
+import com.github.brunodles.medicalconferences.entity.Conference;
+import com.github.brunodles.medicalconferences.entity.Topic;
 
 import java.util.Date;
 import java.util.List;
@@ -21,7 +23,7 @@ import static com.github.brunodles.medicalconferences.repositories.tables.Confer
  */
 
 @Table(name = TABLE)
-public class Conference extends Model {
+public class ConferenceRecord extends Model implements Conference {
     @Column(name = COLUMN_ID)
     public Long id;
     @Column(name = COLUMN_DATE)
@@ -33,22 +35,56 @@ public class Conference extends Model {
     @Column(name = COLUMN_LOCATION)
     public String location;
     @Column(name = COLUMN_CONTACT)
-    public Contact contact;
-    public List<String> topics;
+    public ContactRecord contactRecord;
+    public List<Topic> topics;
     @Column(name = COLUMN_CANCELED)
     public boolean canceled;
 
-    public Conference() {
+    public ConferenceRecord() {
     }
 
-    public Conference(com.github.brunodles.medicalconferences.entity.Conference conference) {
+    public ConferenceRecord(Conference conference) {
         this.id = conference.getId();
-        this.anAbstract = conference.getAnAbstract();
+        this.anAbstract = conference.getAbstract();
         this.canceled = conference.isCanceled();
         this.date = conference.getDate();
         this.location = conference.getLocation();
         this.name = conference.getName();
 //        this.topics =
-        this.contact = new Contact(conference.getContact());
+        this.contactRecord = new ContactRecord(conference.getContact());
+    }
+
+    @Override
+    public Date getDate() {
+        return date;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getAbstract() {
+        return anAbstract;
+    }
+
+    @Override
+    public String getLocation() {
+        return location;
+    }
+
+    public com.github.brunodles.medicalconferences.entity.Contact getContact() {
+        return contactRecord;
+    }
+
+    @Override
+    public List<Topic> getTopics() {
+        return topics;
+    }
+
+    @Override
+    public boolean isCanceled() {
+        return canceled;
     }
 }

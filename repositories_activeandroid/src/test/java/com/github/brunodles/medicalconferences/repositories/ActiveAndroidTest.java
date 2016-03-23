@@ -44,7 +44,7 @@ public class ActiveAndroidTest {
 
     @Test
     public void shouldBeAbleToSave() {
-//        Contact temp = new Contact();
+//        ContactRecord temp = new ContactRecord();
         Temp temp = new Temp();
         temp.name = "Temp";
         temp.save();

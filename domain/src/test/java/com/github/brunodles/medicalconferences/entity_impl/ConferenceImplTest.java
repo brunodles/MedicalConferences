@@ -1,11 +1,17 @@
-package com.github.brunodles.medicalconferences.entity;
+package com.github.brunodles.medicalconferences.entity_impl;
 
+import com.github.brunodles.medicalconferences.entity.Topic;
+import com.github.brunodles.medicalconferences.entity_impl.ConferenceImpl;
+import com.github.brunodles.medicalconferences.entity_impl.TopicImpl;
 import com.mscharhag.oleaster.runner.OleasterRunner;
 
 import org.junit.runner.RunWith;
 
 import java.util.List;
 
+import static com.github.brunodles.medicalconferences.Factory.topic1;
+import static com.github.brunodles.medicalconferences.Factory.topic2;
+import static com.github.brunodles.medicalconferences.Factory.topic3;
 import static com.mscharhag.oleaster.matcher.Matchers.expect;
 import static com.mscharhag.oleaster.runner.StaticRunnerSupport.beforeEach;
 import static com.mscharhag.oleaster.runner.StaticRunnerSupport.describe;
@@ -16,16 +22,18 @@ import static java.util.Arrays.asList;
  * Created by bruno on 14/03/16.
  */
 @RunWith(OleasterRunner.class)
-public class ConferenceTest {
+public class ConferenceImplTest {
 
-    private Conference conference;
+    private ConferenceImpl conference;
 
-    private static final List<String> TOPICS = asList("Topic1", "Topic2", "Topic3");
+    private static final List<Topic> TOPICS = asList(topic1(), topic2(), topic3());
+
+    private final Topic topic = topic1();
 
     {
         describe("Given a Conference", () -> {
             beforeEach(() -> {
-                conference = new Conference();
+                conference = new ConferenceImpl();
             });
 
             describe("When getTopics is called", () -> {
@@ -33,7 +41,7 @@ public class ConferenceTest {
                 describe("When any topic was added", () -> {
 
                     it("should return a empty list", () -> {
-                        List<String> topics = conference.getTopics();
+                        List<Topic> topics = conference.getTopics();
                         expect(topics.size()).toEqual(0L);
                         expect(topics.isEmpty()).toBeTrue();
                     });
@@ -42,13 +50,13 @@ public class ConferenceTest {
 
                 describe("When add a topic", () -> {
 
-                    beforeEach(() -> conference.addTopic("Topic"));
+                    beforeEach(() -> conference.addTopic(topic));
 
                     it("should return the added topic", () -> {
-                        List<String> topics = conference.getTopics();
+                        List<Topic> topics = conference.getTopics();
                         expect(topics.size()).toEqual(1L);
                         expect(topics.isEmpty()).toBeFalse();
-                        expect(topics.get(0)).toEqual("Topic");
+                        expect(topics.get(0)).toEqual(topic);
                     });
 
                 });
@@ -70,17 +78,17 @@ public class ConferenceTest {
                         TOPICS.forEach(conference::addTopic);
                     });
 
-                    describe("When add a empty string to topics list", () -> {
+                    describe("When add a invalid topic to conference", () -> {
 
                         beforeEach(() -> {
-                            conference.addTopic("");
+                            conference.addTopic(new TopicImpl());
                         });
 
                         itShouldBeIgnored();
 
                     });
 
-                    describe("When add a nullto topics list", () -> {
+                    describe("When add a null to topics list", () -> {
 
                         beforeEach(() -> {
                             conference.addTopic(null);

@@ -3,6 +3,7 @@ package com.github.brunodles.medicalconferences.use_case;
 import com.github.brunodles.medicalconferences.Factory;
 import com.github.brunodles.medicalconferences.entity.Invite;
 import com.github.brunodles.medicalconferences.entity.User;
+import com.github.brunodles.medicalconferences.entity_impl.InviteImpl;
 import com.github.brunodles.medicalconferences.reposytory.Finder;
 import com.github.brunodles.medicalconferences.reposytory.Listener;
 import com.github.brunodles.medicalconferences.reposytory.Repository;
@@ -11,6 +12,7 @@ import com.mscharhag.oleaster.runner.OleasterRunner;
 import org.junit.runner.RunWith;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static com.github.brunodles.medicalconferences.Factory.conference;
@@ -65,7 +67,7 @@ public class InviterTest {
                 });
 
                 it("should be saved on repository", () -> {
-                    verify(repo, only()).create(any(Invite.class), any(Listener.class));
+                    verify(repo, only()).create(any(InviteImpl.class), any(Listener.class));
                 });
 
             });
@@ -103,7 +105,7 @@ public class InviterTest {
 
                     before(() -> {
                         when(finder.findBy(eq("user"), anyObject())).thenReturn(finder);
-                        when(finder.list(10)).thenReturn(new ArrayList<Invite>());
+                        when(finder.list(10)).thenReturn(Collections.emptyList());
                     });
 
                     it("should return a empty list", () -> {
@@ -139,11 +141,7 @@ public class InviterTest {
                     describe("When the user accept", () -> {
                         before(() -> {
                             invite = inviteList.get(0);
-                            result = inviter.accept(invite);
-                        });
-
-                        it("should return true", () -> {
-                            expect(result).toBeTrue();
+                            invite = inviter.accept(invite);
                         });
 
                         it("should return true to isAccepted", () -> {
@@ -162,11 +160,7 @@ public class InviterTest {
                     describe("When the user reject", () -> {
                         before(() -> {
                             invite = inviteList.get(0);
-                            result = inviter.reject(invite);
-                        });
-
-                        it("should return true", () -> {
-                            expect(result).toBeTrue();
+                            invite = inviter.reject(invite);
                         });
 
                         it("should return false for isAccepted", () -> {

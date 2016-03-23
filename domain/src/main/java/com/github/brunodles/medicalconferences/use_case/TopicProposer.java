@@ -3,6 +3,7 @@ package com.github.brunodles.medicalconferences.use_case;
 import com.github.brunodles.medicalconferences.entity.Conference;
 import com.github.brunodles.medicalconferences.entity.TopicProposal;
 import com.github.brunodles.medicalconferences.entity.User;
+import com.github.brunodles.medicalconferences.entity_impl.TopicProposalImpl;
 import com.github.brunodles.medicalconferences.reposytory.Finder;
 import com.github.brunodles.medicalconferences.reposytory.Listener;
 import com.github.brunodles.medicalconferences.reposytory.LogErrorListener;
@@ -27,7 +28,7 @@ public class TopicProposer {
     }
 
     public boolean propose(Conference conference, String topic, User user) {
-        TopicProposal proposal = new TopicProposal(conference, topic, user);
+        TopicProposal proposal = new TopicProposalImpl(conference, topic, user);
         if (!topicProposalValidator.isValid(proposal)) return false;
 
         topicRepository.create(proposal, createListener);

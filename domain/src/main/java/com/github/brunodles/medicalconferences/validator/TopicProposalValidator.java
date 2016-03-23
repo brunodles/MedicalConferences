@@ -1,6 +1,7 @@
 package com.github.brunodles.medicalconferences.validator;
 
 import com.github.brunodles.medicalconferences.common.Validator;
+import com.github.brunodles.medicalconferences.entity.Topic;
 import com.github.brunodles.medicalconferences.entity.TopicProposal;
 
 import static com.github.brunodles.medicalconferences.common.StringValidator.isNullOrEmpty;
@@ -14,7 +15,7 @@ public class TopicProposalValidator implements Validator<TopicProposal> {
     public boolean isValid(TopicProposal topicProposal) {
         if (topicProposal.getConference() == null) return false;
         if (topicProposal.getSpeaker() == null) return false;
-        if (isNullOrEmpty(topicProposal.getTopic())) return false;
+        if (isNullOrEmpty(topicProposal.getTitle())) return false;
         return true;
     }
 }
