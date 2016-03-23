@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.activeandroid.ActiveAndroid;
 import com.activeandroid.Model;
+import com.github.brunodles.medicalconferences.entity.Entity;
 import com.github.brunodles.medicalconferences.repositories.common.Callable;
 import com.github.brunodles.medicalconferences.reposytory.Listener;
 import com.github.brunodles.medicalconferences.reposytory.Repository;
@@ -11,28 +12,28 @@ import com.github.brunodles.medicalconferences.reposytory.Repository;
 /**
  * Created by bruno on 15/03/16.
  */
-abstract class BaseRepository<Entity, DTO extends Model> implements Repository<Entity> {
+abstract class BaseRepository<ENTITY extends Entity, DTO extends Model> implements Repository<ENTITY> {
 
     public BaseRepository() {
     }
 
     @Override
-    public void create(Entity object, Listener listener) {
+    public void create(ENTITY object, Listener listener) {
         tryWithObject(object, Model::save, listener);
     }
 
     @Override
-    public void update(Entity object, Listener listener) {
+    public void update(ENTITY object, Listener listener) {
         tryWithObject(object, Model::save, listener);
     }
 
     @Override
-    public void delete(Entity object, Listener listener) {
+    public void delete(ENTITY object, Listener listener) {
         tryWithObject(object, Model::delete, listener);
 
     }
 
-    private void tryWithObject(Entity obj, Callable<DTO> block, Listener listener) {
+    private void tryWithObject(ENTITY obj, Callable<DTO> block, Listener listener) {
         ActiveAndroid.beginTransaction();
         DTO object = parse(obj);
         try {
@@ -47,5 +48,5 @@ abstract class BaseRepository<Entity, DTO extends Model> implements Repository<E
     }
 
     @NonNull
-    abstract DTO parse(Entity obj);
+    abstract DTO parse(ENTITY obj);
 }
