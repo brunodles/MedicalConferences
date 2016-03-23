@@ -5,6 +5,8 @@ import com.github.brunodles.medicalconferences.entity.Invite;
 import com.github.brunodles.medicalconferences.entity.User;
 import com.github.brunodles.medicalconferences.entity_impl.InviteImpl;
 import com.github.brunodles.medicalconferences.reposytory.Finder;
+import com.github.brunodles.medicalconferences.reposytory.InviteFinder;
+import com.github.brunodles.medicalconferences.reposytory.InviteRepository;
 import com.github.brunodles.medicalconferences.reposytory.Listener;
 import com.github.brunodles.medicalconferences.reposytory.Repository;
 import com.mscharhag.oleaster.runner.OleasterRunner;
@@ -40,8 +42,8 @@ import static org.mockito.Mockito.when;
 public class InviterTest {
 
     private Inviter inviter;
-    private Repository<Invite> repo;
-    private Finder<Invite, Long> finder;
+    private InviteRepository repo;
+    private InviteFinder finder;
 
     private boolean result;
 
@@ -52,8 +54,8 @@ public class InviterTest {
     {
         describe("Given a Inviter", () -> {
             before(() -> {
-                repo = mock(Repository.class);
-                finder = mock(Finder.class);
+                repo = mock(InviteRepository.class);
+                finder = mock(InviteFinder.class);
                 inviter = new Inviter(repo, finder);
             });
 

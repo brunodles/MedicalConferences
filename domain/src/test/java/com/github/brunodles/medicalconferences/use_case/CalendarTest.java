@@ -2,6 +2,7 @@ package com.github.brunodles.medicalconferences.use_case;
 
 import com.github.brunodles.medicalconferences.Factory;
 import com.github.brunodles.medicalconferences.entity.Conference;
+import com.github.brunodles.medicalconferences.reposytory.ConferenceFinder;
 import com.github.brunodles.medicalconferences.reposytory.Finder;
 import com.mscharhag.oleaster.runner.OleasterRunner;
 
@@ -29,7 +30,7 @@ import static org.mockito.Mockito.when;
 @RunWith(OleasterRunner.class)
 public class CalendarTest {
 
-    private Finder<Conference, Long> finder;
+    private ConferenceFinder finder;
 
     private Calendar calendar;
 
@@ -38,7 +39,7 @@ public class CalendarTest {
     {
         describe("Given a calendar", () -> {
             before(() -> {
-                finder = mock(Finder.class);
+                finder = mock(ConferenceFinder.class);
                 when(finder.findBy(eq("startDate"), any(Date.class))).thenReturn(finder);
                 calendar = new Calendar(finder);
             });

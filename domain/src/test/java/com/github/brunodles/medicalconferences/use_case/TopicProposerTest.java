@@ -6,6 +6,8 @@ import com.github.brunodles.medicalconferences.entity.TopicProposal;
 import com.github.brunodles.medicalconferences.reposytory.Finder;
 import com.github.brunodles.medicalconferences.reposytory.Listener;
 import com.github.brunodles.medicalconferences.reposytory.Repository;
+import com.github.brunodles.medicalconferences.reposytory.TopicProposalFinder;
+import com.github.brunodles.medicalconferences.reposytory.TopicProposalRepository;
 import com.mscharhag.oleaster.runner.OleasterRunner;
 
 import org.junit.runner.RunWith;
@@ -40,10 +42,8 @@ import static org.mockito.Mockito.when;
 public class TopicProposerTest {
 
     private TopicProposer topicProposer;
-
-    private Repository<TopicProposal> repo;
-
-    private Finder<TopicProposal, Long> finder;
+    private TopicProposalRepository repo;
+    private TopicProposalFinder finder;
 
     private boolean result;
 
@@ -53,8 +53,8 @@ public class TopicProposerTest {
         describe("Given a TopicProposer", () -> {
 
             before(() -> {
-                repo = mock(Repository.class);
-                finder = mock(Finder.class);
+                repo = mock(TopicProposalRepository.class);
+                finder = mock(TopicProposalFinder.class);
                 topicProposer = new TopicProposer(repo, finder);
             });
 

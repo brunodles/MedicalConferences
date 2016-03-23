@@ -3,6 +3,8 @@ package com.github.brunodles.medicalconferences.use_case;
 import com.github.brunodles.medicalconferences.Factory;
 import com.github.brunodles.medicalconferences.entity.Conference;
 import com.github.brunodles.medicalconferences.entity_impl.ConferenceImpl;
+import com.github.brunodles.medicalconferences.reposytory.ConferenceFinder;
+import com.github.brunodles.medicalconferences.reposytory.ConferenceRepository;
 import com.github.brunodles.medicalconferences.reposytory.Finder;
 import com.github.brunodles.medicalconferences.reposytory.Listener;
 import com.github.brunodles.medicalconferences.reposytory.Repository;
@@ -29,8 +31,8 @@ import static org.mockito.Mockito.when;
 @RunWith(OleasterRunner.class)
 public class SchedulerTest {
 
-    private Repository<Conference> repo;
-    private Finder<Conference, Long> finder;
+    private ConferenceRepository repo;
+    private ConferenceFinder finder;
     private Scheduler scheduler;
 
     private Conference conference;
@@ -41,8 +43,8 @@ public class SchedulerTest {
         describe("Given a Scheduler", () -> {
 
             beforeEach(() -> {
-                repo = mock(Repository.class);
-                finder = mock(Finder.class);
+                repo = mock(ConferenceRepository.class);
+                finder = mock(ConferenceFinder.class);
                 scheduler = new Scheduler(repo, finder);
             });
 
