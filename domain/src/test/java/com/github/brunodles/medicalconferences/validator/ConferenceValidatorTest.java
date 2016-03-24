@@ -1,6 +1,7 @@
 package com.github.brunodles.medicalconferences.validator;
 
 import com.github.brunodles.medicalconferences.entity.Conference;
+import com.github.brunodles.medicalconferences.entity_impl.ConferenceImpl;
 import com.mscharhag.oleaster.matcher.matchers.BooleanMatcher;
 import com.mscharhag.oleaster.runner.OleasterRunner;
 
@@ -23,7 +24,7 @@ import static com.mscharhag.oleaster.runner.StaticRunnerSupport.it;
 public class ConferenceValidatorTest {
 
     private ConferenceValidator conferenceValidator;
-    private Conference conference;
+    private ConferenceImpl conference;
 
     {
         describe("Given a ConferenceValidator", () -> {
@@ -61,7 +62,7 @@ public class ConferenceValidatorTest {
                 });
 
                 it("should be valid with name, conact, location and date", () -> {
-                    conference = new Conference();
+                    conference = new ConferenceImpl();
                     conference.setName("My conference");
                     conference.setContact(contact());
                     conference.setDate(date("03.01.2017"));

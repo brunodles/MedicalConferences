@@ -2,6 +2,7 @@ package com.github.brunodles.medicalconferences.validator;
 
 import com.github.brunodles.medicalconferences.Factory;
 import com.github.brunodles.medicalconferences.entity.Contact;
+import com.github.brunodles.medicalconferences.entity_impl.ContactImpl;
 import com.mscharhag.oleaster.matcher.matchers.BooleanMatcher;
 import com.mscharhag.oleaster.runner.OleasterRunner;
 
@@ -22,7 +23,7 @@ public class ContactValidatorTest {
 
     private ContactValidator contactValidator;
 
-    private Contact contact;
+    private ContactImpl contact;
 
     {
         describe("Given a ContactValidator", () -> {

@@ -1,45 +1,14 @@
 package com.github.brunodles.medicalconferences.entity;
 
 /**
- * Created by bruno on 14/03/16.
+ * Created by bruno on 23/03/16.
  */
-public class Invite {
+public interface Invite extends Entity {
+    User getUser();
 
-    private final User user;
-    private final Conference conference;
-    private State state;
+    Conference getConference();
 
-    public Invite(User user, Conference conference) {
-        this.user = user;
-        this.conference = conference;
-        state = State.NONE;
-    }
+    boolean isAccepted();
 
-    public User getUser() {
-        return user;
-    }
-
-    public Conference getConference() {
-        return conference;
-    }
-
-    public void setAccepted() {
-        state = State.ACCEPTED;
-    }
-
-    public void setRejected(){
-        state = State.REJECTED;
-    }
-
-    public boolean isAccepted() {
-        return state == State.ACCEPTED;
-    }
-
-    public boolean isRejected() {
-        return state == State.REJECTED;
-    }
-
-    private static enum State{
-        NONE, ACCEPTED, REJECTED;
-    }
+    boolean isRejected();
 }

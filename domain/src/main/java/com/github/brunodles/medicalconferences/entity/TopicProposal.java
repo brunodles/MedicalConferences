@@ -1,28 +1,12 @@
 package com.github.brunodles.medicalconferences.entity;
 
 /**
- * Created by bruno on 15/03/16.
+ * Created by bruno on 23/03/16.
  */
-public class TopicProposal {
-    private final Conference conference;
-    private final String topic;
-    private final User speaker;
+public interface TopicProposal extends Entity{
+    Conference getConference();
 
-    public TopicProposal(Conference conference, String topic, User speaker) {
-        this.conference = conference;
-        this.topic = topic;
-        this.speaker = speaker;
-    }
+    String getTitle();
 
-    public Conference getConference() {
-        return conference;
-    }
-
-    public String getTopic() {
-        return topic;
-    }
-
-    public User getSpeaker() {
-        return speaker;
-    }
+    User getSpeaker();
 }
